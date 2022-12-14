@@ -2,6 +2,8 @@
 import re, argparse, os, requests,termcolor, redvid
 from fake_useragent import UserAgent
 
+
+
 class other:
     def nsfwcheck(data={},num=0,userwantsnsfw=False,only=False):
         if str.lower(userwantsnsfw) == 'true' and str.lower(only) == 'true':
@@ -40,7 +42,8 @@ class other:
 
 class wifi_related:
     def add(data,num,location,sub,subnum):
-        
+        blank = '            '
+
         location = os.path.join(location,sub[subnum])
         if not os.path.exists(location):
             os.makedirs(location)
@@ -57,7 +60,7 @@ class wifi_related:
         with open(location+'\log.txt','a+') as log:
             for i in range(len(listlocation)):
                     if title in listlocation[i]:
-                        print(termcolor.colored(title+' has a match, skipping..',on_color='on_yellow'))
+                        print(termcolor.colored(title+' has a match, skipping..',on_color='on_yellow'),blank)
                         log.write(title+' has a match, skipping..\n')
                         return
 
@@ -68,9 +71,9 @@ class wifi_related:
                 try:
                     video = downloader.download()
                     os.rename(video, os.path.join(location,title)+'.mp4')
-                    print(termcolor.colored(title,on_color='on_green'))
+                    print(termcolor.colored(title,on_color='on_green'),blank)
                 except:
-                    print(termcolor.colored(title+'     RETRIEVE ERROR 2',on_color='on_red'))
+                    print(termcolor.colored(title+'     RETRIEVE ERROR 2',on_color='on_red'),blank)
                     log.write(title+'     RETRIEVE ERROR 2\n')
 
             elif filetype != False and img_url2 != False:
@@ -79,7 +82,7 @@ class wifi_related:
                     image = requests.get(img_url2, allow_redirects=True)                                    
                 except:
                     image = None
-                    print(termcolor.colored(title+'      RETRIEVE ERROR',on_color='on_red'))
+                    print(termcolor.colored(title+'      RETRIEVE ERROR',on_color='on_red'),blank)
                     log.write(title+'      RETRIEVE ERROR '+img_url+'\n')
                 
                 if image != None:
@@ -87,15 +90,15 @@ class wifi_related:
                     try: 
                         with open(location+'/'+ title + filetype, mode='bx') as file:
                             file.write(image.content)
-                        print(termcolor.colored(title,on_color='on_green'))
+                        print(termcolor.colored(title,on_color='on_green'),blank)
                     except:
-                        print(termcolor.colored(title+'     WRITE ERROR',on_color='on_red'))
+                        print(termcolor.colored(title+'     WRITE ERROR',on_color='on_red'),blank)
                         log.write(title+'     WRITE ERROR\n')
 
 
-                print(termcolor.colored(title,on_color='on_green'))
+                print(termcolor.colored(title,on_color='on_green'),blank)
             else:
-                print(termcolor.colored(title+'      DID NOT PASS FILECHECK. LINK '+img_url,on_color='on_red'))
+                print(termcolor.colored(title+'      DID NOT PASS FILECHECK. LINK '+img_url,on_color='on_red'),blank)
                 log.write(title+'      DID NOT PASS FILECHECK. LINK '+img_url+'\n')
 
 

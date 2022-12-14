@@ -44,6 +44,7 @@ for i in range(0,len(subreddits)):
         for b in range(len(data)):
             if other.nsfwcheck(data=data,num=b,userwantsnsfw=nsfw,only=only):
                 wifi_related.add(data,b,location,subreddits,i)
-            string = str(b)+'/'+str(len(data))+' Complete'
+            string = str(b)+'/'+str(len(data))+' Complete | Current subreddit: '+subreddits[i]
             print(termcolor.colored(string,on_color='on_white'),end='\r')
+print(termcolor.colored('complete',on_color='on_white'),'                                   ',end='\r')
             
